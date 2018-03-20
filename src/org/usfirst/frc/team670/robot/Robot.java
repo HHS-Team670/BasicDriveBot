@@ -24,7 +24,7 @@ public class Robot extends IterativeRobot {
 	private Joystick rightStick;
 	private TalonSRX left1, left2, right1, right2;
 	//These values must be set to the proper motor inputs
-	private static int leftM1 = 0, leftM2 = 1, rightM1 = 2, rightM2 = 3;
+	private static int leftM1 = 1, leftM2 = 2, rightM1 = 3, rightM2 = 0;
 
 	@Override
 	public void robotInit() {
@@ -36,12 +36,13 @@ public class Robot extends IterativeRobot {
 		right2 = new TalonSRX(rightM2);
 
 		left2.set(ControlMode.Follower, leftM1);
-		right2.set(ControlMode.Follower, rightM1);
+		//right2.set(ControlMode.Follower, rightM1);
 	}
 
 	@Override
 	public void teleopPeriodic() {
 		left1.set(ControlMode.PercentOutput, leftStick.getY());
+		right2.set(ControlMode.PercentOutput, -rightStick.getY());
 		right1.set(ControlMode.PercentOutput, rightStick.getY());
 	}
 }
